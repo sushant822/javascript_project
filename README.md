@@ -41,6 +41,9 @@ Screenshots of how a user can select visualisation options: Update with pics aft
 
 •	Web scraping
 
+## Flow Diagram
+![Arcitictural Diagram](Arcitictural%20Diagram.png)
+
 
 ## RoadMap
 

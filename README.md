@@ -22,14 +22,23 @@ Screenshots of how a user can select visualisation options: Update with pics aft
 ## Tools and Libraries Used:
 
 •	BeautifulSoup
+
 •	D3.js.
+
 •	Leaflet
+
 •	Javascript
+
 •	Jupyter Notebook
+
 •	Mapbox
+
 •	Mongo DB
+
 •	Python
+
 •	Flask
+
 •	Web scraping
 
 

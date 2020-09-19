@@ -15,7 +15,7 @@ con = psycopg2.connect(
             host="localhost",
             database="realestate_db",
             user="postgres",
-            password="123"
+            password="1"
 )
 
 
@@ -26,7 +26,7 @@ def home():
     cur = con.cursor()
 
     # execute query
-    cur.execute("SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score FROM calgary AS cl JOIN score AS s ON cl.postal_code = s.postal_code")
+    cur.execute("SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score FROM calgary_df AS cl JOIN score_df AS s ON cl.postal_code = s.postal_code")
 
     calgary_data = cur.fetchall()
     print(calgary_data)

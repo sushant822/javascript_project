@@ -62,7 +62,7 @@ def home():
 def calgary_data():
     """Return the Calgary data as json"""
     calgary = calgary_data_fun()
-    calgary = calgary[:15]
+    # calgary = calgary[:15]
     return jsonify(calgary)
 
 

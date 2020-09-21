@@ -41,35 +41,36 @@
             <!-- New Table -->
             
             <table class="table table-bordered table-hover table-condensed">
-              <thead><tr><th title="Field #1">Price ($)</th>
-              <th title="Field #2">Address</th>
-              <th title="Field #3">Postal Code</th>
-              <th title="Field #4">Bed</th>
-              <th title="Field #5">Full Bath</th>
-                  <th title="Field #6">Half Bath</th>
-                  <th title="Field #7">Property Area</th>
-              <th title="Field #8">Property Type</th>
-                  <th title="Field #9">Walk Score</th>
-                  <th title="Field #10">Bike Score</th>
-                  <th title="Field #11">Transit Score</th>
-                  <th title="Field #10">Latitude</th>
-                  <th title="Field #11">Longitude</th>
+              <thead><tr>
+                <th title="Field #1">Price ($)</th>
+                <th title="Field #2">Address</th>
+                <th title="Field #3">Postal Code</th>
+                <th title="Field #4">Bed</th>
+                <th title="Field #5">Full Bath</th>
+                <th title="Field #6">Half Bath</th>
+                <th title="Field #7">Property Area</th>
+                <th title="Field #8">Property Type</th>
+                <th title="Field #9">Walk Score</th>
+                <th title="Field #10">Bike Score</th>
+                <th title="Field #11">Transit Score</th>
+                <th title="Field #10">Latitude</th>
+                <th title="Field #11">Longitude</th>
               </tr></thead>
               <tbody><tr>
                 {% for item in calgary %}
-              <td align="left">{{item.0|safe}}</td>
-              <td align="left">{{item.1|safe}}</td>
-              <td align="left">{{item.2|safe}}</td>
-              <td align="left">{{item.3|safe}}</td>
-              <td align="left">{{item.4|safe}}</td>
-              <td align="left">{{item.5|safe}}</td>
-              <td align="left">{{item.6|safe}}</td>
-              <td align="left">{{item.7|safe}}</td>
-              <td align="left">{{item.8|safe}}</td>
-              <td align="left">{{item.9|safe}}</td>
-              <td align="left">{{item.10|safe}}</td>
-              <td align="left">{{item.11|safe}}</td>
-              <td align="left">{{item.12|safe}}</td>
+                <td align="left">{{item.0|safe}}</td>
+                <td align="left">{{item.1|safe}}</td>
+                <td align="left">{{item.2|safe}}</td>
+                <td align="left">{{item.3|safe}}</td>
+                <td align="left">{{item.4|safe}}</td>
+                <td align="left">{{item.5|safe}}</td>
+                <td align="left">{{item.6|safe}}</td>
+                <td align="left">{{item.7|safe}}</td>
+                <td align="left">{{item.8|safe}}</td>
+                <td align="left">{{item.9|safe}}</td>
+                <td align="left">{{item.10|safe}}</td>
+                <td align="left">{{item.11|safe}}</td>
+                <td align="left">{{item.12|safe}}</td>
               </tr>
               {% endfor %}
               </tbody>

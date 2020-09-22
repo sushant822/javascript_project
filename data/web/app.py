@@ -28,10 +28,10 @@ def calgary_data_fun():
     # print(calgary_data)
 
     # close cursor
-    cur.close()
+    #cur.close()
 
     # close the connection
-    con.close()
+    #con.close()
 
     return calgary_data
 

@@ -191,12 +191,12 @@ d3.json(url, function(response) {
   csvData = response[0][0]
   // parse data
   csvData.forEach(data => {
-    data.poverty = +data.price;
+    data.poverty = +data.walk_score;
     data.healthcare = +data.property_area;
     data.income = +data.bike_score;
-    data.obesity = +data.walk_score;
-    data.smokes = +data.transit_score;
-    data.age = +data.bed;
+    data.obesity = +data.price;
+    data.smokes = +data.bed;
+    data.age = +data.transit_score;
   });
 
   // xLinearScale and yLinearScale function above csv import
@@ -249,7 +249,7 @@ d3.json(url, function(response) {
     .attr("value", "poverty") // value to grab for event listener
     .classed("aText", true)
     .classed("active", true)
-    .text("In Poverty (%)");
+    .text("Walk Score");
 
   var ageLabel = xlabelsGroup.append("text")
     .attr("x", 0)
@@ -257,7 +257,7 @@ d3.json(url, function(response) {
     .attr("value", "age") // value to grab for event listener
     .classed("aText", true)
     .classed("inactive", true)
-    .text("Age (Median)");
+    .text("Transit Score");
 
   var incomeLabel = xlabelsGroup.append("text")
     .attr("x", 0)
@@ -265,7 +265,7 @@ d3.json(url, function(response) {
     .attr("value", "income") // value to grab for event listener
     .classed("aText", true)
     .classed("inactive", true)
-    .text("Household Income (Median)");
+    .text("Bike Score");
 
   // Create group for three y-axis labels
   var ylabelsGroup = chartGroup.append("g")
@@ -278,7 +278,7 @@ d3.json(url, function(response) {
     .attr("transform", "rotate(-90)")
     .classed("aText", true)
     .classed("active", true)
-    .text("Lacks Healthcare (%)");
+    .text("Property Area");
 
   var smokesLabel = ylabelsGroup.append("text")
     .attr("x", 0)
@@ -287,7 +287,7 @@ d3.json(url, function(response) {
     .attr("transform", "rotate(-90)")
     .classed("aText", true)
     .classed("inactive", true)
-    .text("Smokes (%)");
+    .text("Bed");
 
   var obesityLabel = ylabelsGroup.append("text")
     .attr("x", 0)
@@ -296,7 +296,7 @@ d3.json(url, function(response) {
     .attr("transform", "rotate(-90)")
     .classed("aText", true)
     .classed("inactive", true)
-    .text("Obese (%)");
+    .text("Price");
 
   // updateToolTip function above csv import
   var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);

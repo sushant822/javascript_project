@@ -15,14 +15,16 @@ con = psycopg2.connect(
             host="localhost",
             database="realestate_db",
             user="postgres",
-            password="1"
+            password="123"
 )
 
 def calgary_data_fun():
     cur = con.cursor()
 
     # execute query
-    cur.execute("SELECT json_agg(t) FROM (SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score, coord.lat, coord.long FROM calgary_df AS cl JOIN score_df AS s ON cl.postal_code = s.postal_code JOIN coordinates_df AS coord ON s.postal_code = coord.postal_codes)t")
+    cur.execute("SELECT json_agg(t) FROM (SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score, coord.lat, coord.long FROM calgary AS cl JOIN score AS s ON cl.postal_code = s.postal_code JOIN coordinates AS coord ON s.postal_code = coord.postal_codes)t")
+
+    #cur.execute("SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score, coord.lat, coord.long FROM calgary_df AS cl JOIN score_df AS s ON cl.postal_code = s.postal_code JOIN coordinates_df AS coord ON s.postal_code = coord.postal_codes")
 
     calgary_data = cur.fetchall()
     # print(calgary_data)
@@ -35,16 +37,19 @@ def calgary_data_fun():
 
     return calgary_data
 
-@app.route("/")
-def home():
+
+@app.route("/post")
+def post_group():
 
     # create cursor
-    cur = con.cursor()
+    cur2 = con.cursor()
 
     # execute query
-    cur.execute("SELECT json_agg(t) FROM (SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score, coord.lat, coord.long FROM calgary_df AS cl JOIN score_df AS s ON cl.postal_code = s.postal_code JOIN coordinates_df AS coord ON s.postal_code = coord.postal_codes)t")
+    # cur.execute("SELECT json_agg(t) FROM (SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score, coord.lat, coord.long FROM calgary_df AS cl JOIN score_df AS s ON cl.postal_code = s.postal_code JOIN coordinates_df AS coord ON s.postal_code = coord.postal_codes)t")
 
-    calgary_data = cur.fetchall()
+    cur2.execute("SELECT * FROM post_group")
+    
+    group_data = cur2.fetchall()
     # print(calgary_data)
 
     # close cursor
@@ -54,9 +59,30 @@ def home():
     #con.close()
 
     # Return template and data
+    return render_template("index2.html", group=[i for i in group_data])
+
+
+@app.route("/")
+def home():
+    # create cursor
+    cur = con.cursor()
+
+    # execute query
+    cur.execute("SELECT json_agg(t) FROM (SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score, coord.lat, coord.long FROM calgary_df AS cl JOIN score_df AS s ON cl.postal_code = s.postal_code JOIN coordinates_df AS coord ON s.postal_code = coord.postal_codes)t")
+
+    #cur.execute("SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score, coord.lat, coord.long FROM calgary AS cl JOIN score AS s ON cl.postal_code = s.postal_code JOIN coordinates AS coord ON s.postal_code = coord.postal_codes")
+
+    calgary_data = cur.fetchall()
+    # print(calgary_data)
+
+    # close cursor
+    # cur.close()
+
+    # close the connection
+    # con.close()
+
+    # Return template and data
     return render_template("index.html", calgary=[i for i in calgary_data])
-
-
 
 @app.route("/jsonified")
 def calgary_data():
@@ -68,6 +94,10 @@ def calgary_data():
 @app.route("/viz")
 def viz():
     return render_template("viz.html")
+
+@app.route("/scatter")
+def scatter():
+    return render_template("scatter.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

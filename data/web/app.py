@@ -15,7 +15,7 @@ con = psycopg2.connect(
             host="localhost",
             database="realestate_db",
             user="postgres",
-            password="1"
+            password="123"
 )
 
 def calgary_data_fun():
@@ -76,6 +76,10 @@ def viz():
 @app.route("/scatter")
 def scatter():
     return render_template("scatter.html")
+
+@app.route("/treemap")
+def treemap():
+    return render_template("treemap.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

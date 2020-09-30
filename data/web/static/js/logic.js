@@ -177,12 +177,14 @@ d3.json(url, function(response) {
 
 
 // Creating map object
+/*
 var myMap = L.map("mapid", {
-  center: [51.025036,-114.0411447],
+  center: [51.0228426,-114.0446724],
   zoom: 10.5
 });
-
+*/
 // Adding tile layer to the map
+/*
 L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
   attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
   tileSize: 512,
@@ -191,6 +193,12 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   id: "mapbox/streets-v11",
   accessToken: API_KEY
 }).addTo(myMap);
+*/
+
+
+
+
+
 
 // Store API query variables
 //var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
@@ -237,3 +245,57 @@ d3.json(url, function(data) {
   myMap.addLayer(markers);
 
 });
+
+var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "mapbox/light-v10",
+  accessToken: API_KEY
+});
+
+var satellitemap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  maxZoom: 18,
+  id: "streets-v11",
+  accessToken: API_KEY
+});
+
+var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  maxZoom: 18,
+  id: "dark-v10",
+  accessToken: API_KEY
+});
+
+var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  maxZoom: 18,
+  id: "satellite-streets-v11",
+  accessToken: API_KEY
+});
+
+var baseMaps = {
+  "Satellite Map": satellitemap,
+  "Light Map": lightmap,
+  "Dark Map": darkmap,
+  "Street Map": streetmap
+};
+
+// Overlays that may be toggled on or off
+/*
+var overlayMaps = {
+  "Properties": circleMarkers
+  };
+*/
+// Define a map object
+var myMap = L.map("mapid", {
+  center: [51.025036,-114.0411447],
+  zoom: 10.5,
+  layers: [satellitemap]
+});
+
+// Pass our map layers into our layer control
+// Add the layer control to the map
+L.control.layers(baseMaps).addTo(myMap);

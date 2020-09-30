@@ -1,17 +1,6 @@
 var url = "http://127.0.0.1:5000//jsonified";
-  //var url = "https://data.sfgov.org/resource/cuks-n6tp.json?$limit=10000";
-  
-// @TODO: YOUR CODE HERE!
 
-/*d3.csv("assets/data/data.csv").then (data => {
-    var dataCategories = data.map(data => data.poverty);
-    data.forEach(data => console.log(`Poverty: ${data.poverty}`));
-
-    var dataArray = data.map(data => data.healthcare);
-    data.forEach(data => console.log(`Healthcare: ${data.healthcare}`));
-});*/
-
-var svgWidth = 960;
+var svgWidth = 980;
 var svgHeight = 500;
 
 var margin = {
@@ -37,8 +26,8 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Initial Params
-var chosenXAxis = "poverty";
-var chosenYAxis = "healthcare";
+var chosenXAxis = "walk_score";
+var chosenYAxis = "property_area";
 
 // function used for updating x-scale var upon click on axis label
 function xScale(csvData, chosenXAxis) {
@@ -109,10 +98,10 @@ function renderText(textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
 // function used for styling tooltip values
 function styleX(value, chosenXAxis) {
 
-  if (chosenXAxis === 'poverty') {
-      return `${value}%`;
+  if (chosenXAxis === 'walk_score') {
+      return `${value}`;
   }
-  else if (chosenXAxis === 'income') {
+  else if (chosenXAxis === 'bike_score') {
       return `${value}`;
   }
   else {
@@ -122,14 +111,11 @@ function styleX(value, chosenXAxis) {
 
 function styleY(value, chosenYAxis) {
 
-  if (chosenYAxis === 'healthcare') {
-      return `${value}%`;
-  }
-  else if (chosenYAxis === 'smokes') {
-      return `${value}%`;
+  if (chosenYAxis === 'property_area') {
+      return `${value}`;
   }
   else {
-    return `${value}%`;
+    return `${value}`;
   }
 }
 
@@ -140,25 +126,22 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
   var ylabel;
 
   // X axis lables
-  if (chosenXAxis === "poverty") {
-    xlabel = "Poverty:";
+  if (chosenXAxis === "walk_score") {
+    xlabel = "Walk Score:";
   }
-  else if (chosenXAxis === "income") {
-    xlabel = "Household Income (Median):";
+  else if (chosenXAxis === "bike_score") {
+    xlabel = "Bike Score:";
   }
   else {
-    xlabel = "Age (Median):";
+    xlabel = "Transit Score:";
   }
 
   // Y axis lables
-  if (chosenYAxis === "healthcare") {
-    ylabel = "Lacks Healthcare:";
-  }
-  else if (chosenYAxis === "obesity") {
-    ylabel = "obesity:";
+  if (chosenYAxis === "property_area") {
+    ylabel = "Property Area:";
   }
   else {
-    ylabel = "Smokes:";
+    ylabel = "Price:";
   }
 
   // Create tooltip
@@ -184,19 +167,16 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 }
 
 // Retrieve data from the CSV file and execute everything below
-//d3.csv("assets/data/data.csv").then((csvData, err) => {
-//  if (err) throw err;
 
 d3.json(url, function(response) {
   csvData = response[0][0]
   // parse data
   csvData.forEach(data => {
-    data.poverty = +data.walk_score;
-    data.healthcare = +data.property_area;
-    data.income = +data.bike_score;
-    data.obesity = +data.price;
-    data.smokes = +data.bed;
-    data.age = +data.transit_score;
+    data.walk_score = +data.walk_score;
+    data.property_area = +data.property_area;
+    data.bike_score = +data.bike_score;
+    data.price = +data.price;
+    data.transit_score = +data.transit_score;
   });
 
   // xLinearScale and yLinearScale function above csv import
@@ -223,7 +203,7 @@ d3.json(url, function(response) {
     .append("circle")
     .classed("stateCircle", true)
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
-    .attr("cy", d => yLinearScale(d.healthcare))
+    .attr("cy", d => yLinearScale(d.property_area))
     .attr("r", 8);
     //.attr("opacity", ".5");
 
@@ -243,26 +223,26 @@ d3.json(url, function(response) {
   var xlabelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
-  var povertyLabel = xlabelsGroup.append("text")
+  var walk_scoreLabel = xlabelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 20)
-    .attr("value", "poverty") // value to grab for event listener
+    .attr("value", "walk_score") // value to grab for event listener
     .classed("aText", true)
     .classed("active", true)
     .text("Walk Score");
 
-  var ageLabel = xlabelsGroup.append("text")
+  var transit_scoreLabel = xlabelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 40)
-    .attr("value", "age") // value to grab for event listener
+    .attr("value", "transit_score") // value to grab for event listener
     .classed("aText", true)
     .classed("inactive", true)
     .text("Transit Score");
 
-  var incomeLabel = xlabelsGroup.append("text")
+  var bike_scoreLabel = xlabelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 60)
-    .attr("value", "income") // value to grab for event listener
+    .attr("value", "bike_score") // value to grab for event listener
     .classed("aText", true)
     .classed("inactive", true)
     .text("Bike Score");
@@ -271,28 +251,19 @@ d3.json(url, function(response) {
   var ylabelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${0 - margin.left/4}, ${height/2})`);
 
-  var healthcareLabel = ylabelsGroup.append("text")
+  var property_areaLabel = ylabelsGroup.append("text")
     .attr("x", 0)
     .attr("y", -20)
-    .attr("value", "healthcare") // value to grab for event listener
+    .attr("value", "property_area") // value to grab for event listener
     .attr("transform", "rotate(-90)")
     .classed("aText", true)
     .classed("active", true)
     .text("Property Area");
 
-  var smokesLabel = ylabelsGroup.append("text")
-    .attr("x", 0)
-    .attr("y", -40)
-    .attr("value", "smokes") // value to grab for event listener
-    .attr("transform", "rotate(-90)")
-    .classed("aText", true)
-    .classed("inactive", true)
-    .text("Bed");
-
-  var obesityLabel = ylabelsGroup.append("text")
+  var priceLabel = ylabelsGroup.append("text")
     .attr("x", 0)
     .attr("y", -60)
-    .attr("value", "obesity") // value to grab for event listener
+    .attr("value", "price") // value to grab for event listener
     .attr("transform", "rotate(-90)")
     .classed("aText", true)
     .classed("inactive", true)
@@ -327,36 +298,36 @@ d3.json(url, function(response) {
         textGroup = renderText(textGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
         // changes classes to change bold text
-        if (chosenXAxis === "poverty") {
-          povertyLabel
+        if (chosenXAxis === "walk_score") {
+          walk_scoreLabel
             .classed("active", true)
             .classed("inactive", false);
-          ageLabel
+          transit_scoreLabel
             .classed("active", false)
             .classed("inactive", true);
-          incomeLabel
+          bike_scoreLabel
             .classed("active", false)
             .classed("inactive", true);
         }
-        else if (chosenXAxis === "age") {
-          povertyLabel
+        else if (chosenXAxis === "transit_score") {
+          walk_scoreLabel
             .classed("active", false)
             .classed("inactive", true);
-          ageLabel
+          transit_scoreLabel
             .classed("active", true)
             .classed("inactive", false);
-          incomeLabel
+          bike_scoreLabel
             .classed("active", false)
             .classed("inactive", true);
         }
         else {
-          povertyLabel
+          walk_scoreLabel
             .classed("active", false)
             .classed("inactive", true);
-          ageLabel
+          transit_scoreLabel
             .classed("active", false)
             .classed("inactive", true);
-          incomeLabel
+          bike_scoreLabel
             .classed("active", true)
             .classed("inactive", false);
         }
@@ -389,36 +360,27 @@ d3.json(url, function(response) {
           textGroup = renderText(textGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
           // changes classes to change bold text
-          if (chosenYAxis === "healthcare") {
-            healthcareLabel
+          if (chosenYAxis === "property_area") {
+            property_areaLabel
               .classed("active", true)
               .classed("inactive", false);
-            smokesLabel
-              .classed("active", false)
-              .classed("inactive", true);
-            obesityLabel
+            priceLabel
               .classed("active", false)
               .classed("inactive", true);
           }
-          else if (chosenYAxis === "smokes") {
-            healthcareLabel
+          else if (chosenYAxis === "bed") {
+            property_areaLabel
               .classed("active", false)
               .classed("inactive", true);
-            smokesLabel
-              .classed("active", true)
-              .classed("inactive", false);
-            obesityLabel
+            priceLabel
               .classed("active", false)
               .classed("inactive", true);
           }
           else {
-            healthcareLabel
+            property_areaLabel
               .classed("active", false)
               .classed("inactive", true);
-            smokesLabel
-              .classed("active", false)
-              .classed("inactive", true);
-            obesityLabel
+            priceLabel
               .classed("active", true)
               .classed("inactive", false);
           }

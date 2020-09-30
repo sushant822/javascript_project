@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Scatter Plot</title>
+  <title>Density Graph</title>
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
@@ -26,12 +26,14 @@
 <body>
 
 	<div class="jumbotron">
-            <h1 class="text-center"><strong>Scatter plot of Calgary house listings</strong></h1>
+            <h1 class="text-center"><strong>Density Graph of bedrooms</strong></h1>
 <div class="displayed">
 	<br>
   <!-- The div that holds our map -->
 	<div class="shadow p-3 mb-5 bg-white rounded">
-  <div id="scatter"></div>
+    <!-- Initialize a select button -->
+<select id="selectButton"></select>
+  <div id="bar"></div>
 	</div>
 		</div>
 </div>
@@ -42,10 +44,8 @@
   <!-- D3 JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
   <!-- Our JavaScript -->
-  <script type="text/javascript" src="static/js/app.js"></script>
-  <!-- Leaflet heatmap plugin-->
-  <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
-
+  <script type="text/javascript" src="static/js/bar.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 	
 		<!-- Bootstrap -->

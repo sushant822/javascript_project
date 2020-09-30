@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>d3.chart.layout.hierarchy.treemap</title>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://rawgit.com/misoproject/d3.chart/master/d3.chart.min.js"></script>
+    <script src="https://rawgit.com/annaghi/d3.chart.layout.hierarchy/master/d3.chart.layout.hierarchy.js"></script>
+    <style>
+      html {
+        display: table;
+        margin: auto; }
+
+      #vis {
+        width: 1280px;
+        height: 720px; }
+
+      .cell text {
+        cursor: move;
+        font: 10px sans-serif;
+        text-anchor: middle; }
+
+      .cell rect {  
+        stroke: #fff; }
+    </style>
+  </head>
+  <body>
+
+    <div id="vis"></div>
+
+    <script>
+      var url = "http://127.0.0.1:5000//jsonified";
+      //var url = "https://rawgit.com/annaghi/d3.chart.layout.hierarchy/master/example/data/flare.json";
+      (function() {
+        d3.json(url, function(data) {
+          json = data[0][0][0];
+          console.log(json);
+          var treemap = d3.select("#vis").append("svg")
+
+            .chart("treemap")
+
+              .value("bike_score")
+              .sortable("_DESC_")
+              //.zoomable()
+              .collapsible()
+              //.duration()
+              //.colors(['#FF0000', '#00FF00', '#0000FF'])
+              ;
+
+          treemap.draw(json);
+
+        });
+      }());
+    </script>
+  </body>
+</html>

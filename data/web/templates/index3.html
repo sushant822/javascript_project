@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>d3.chart.layout.hierarchy.treemap</title>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://rawgit.com/misoproject/d3.chart/master/d3.chart.min.js"></script>
+    <script src="https://rawgit.com/annaghi/d3.chart.layout.hierarchy/master/d3.chart.layout.hierarchy.js"></script>
+    <style>
+      html {
+        display: table;
+        margin: auto; }
+
+      #vis {
+        width: 960px;
+        height: 500px; }
+
+      .cell text {
+        cursor: move;
+        font: 10px sans-serif;
+        text-anchor: middle; }
+
+      .cell rect {
+        stroke: #fff; }
+    </style>
+    <title>Scatter</title>
+
+
+    <!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+</head>
+<body>
+    <div id="vis"></div>
+
+
+    <script>
+        // url = "http://127.0.0.1:5000/post2"
+        // d3.json(url, function(response) {
+        //     data = response[0][0]
+        //     console.log(data)
+        //
+        //     var treemap = d3.select("#vis").append("svg")
+        //         .chart("treemap")
+        //         .value("size")
+        //         .sortable("_DESC_")
+        //         .collapsible()
+        //
+        //
+        //   treemap.draw(data)
+        // })
+
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 10, bottom: 10, left: 10},
+  width = 445 - margin.left - margin.right,
+  height = 445 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+.append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+.append("g")
+  .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+// read json data
+d3.json("http://127.0.0.1:5000/post2", function(data) {
+
+  // Give the data to this cluster layout:
+  console.log(data[0][0])
+  var root = d3.hierarchy(data[0][0]).sum(function(d){ return d.price}) // Here the size of each leave is given in the 'value' field in input data
+
+  // Then d3.treemap computes the position of each element of the hierarchy
+  d3.treemap()
+    .size([width, height])
+    .padding(2)
+    (root)
+
+  // use this information to add rectangles:
+  svg
+    .selectAll("rect")
+    .data(root.leaves())
+    .enter()
+    .append("rect")
+      .attr('x', function (d) { return d.x0; })
+      .attr('y', function (d) { return d.y0; })
+      .attr('width', function (d) { return d.x1 - d.x0; })
+      .attr('height', function (d) { return d.y1 - d.y0; })
+      .style("stroke", "black")
+      .style("fill", "slateblue")
+
+  // and to add the text labels
+  svg
+    .selectAll("text")
+    .data(root.leaves())
+    .enter()
+    .append("text")
+      .attr("x", function(d){ return d.x0+5})    // +10 to adjust position (more right)
+      .attr("y", function(d){ return d.y0+20})    // +20 to adjust position (lower)
+      .text(function(d){ return d.data.name })
+      .attr("font-size", "15px")
+      .attr("fill", "white")
+})
+    </script>
+</body>
+</html>

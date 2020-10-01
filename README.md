@@ -73,7 +73,7 @@ Expanding to other cities in Canada
 	print('Libraries imported!')
 	
 
-### Extract
+## Extract
 
 ### Using BeautifulSoup to scrape property details (house address, house details).
 
@@ -234,7 +234,7 @@ Expanding to other cities in Canada
 	
 	score_df.to_csv('score_df.csv', index=False)
 	
-### Loading to Relational databases
+## Load
 
 ### PostgreSQL
 
@@ -248,8 +248,8 @@ Expanding to other cities in Canada
 	score_df.to_sql(name= "score", con=engine, if_exists="append", index=False)
 	
 
-### Converting-Postal-Codes-to-Coordinates
-	csvData = pd.read_csv('data/score_df.csv')
+## Converting-Postal-Codes-to-Coordinates
+	csvData = pd.read_csv('score_df.csv')
 	csvData.head()
 	
 	csvDataPC = csvData['postal_code']
@@ -276,7 +276,7 @@ Expanding to other cities in Canada
 	
 	coordinatesDF.to_csv('data/cal_coordinatesDF.csv', index=False)
 
-### Loading to Relational databases
+## Load
 
 ### PostgreSQL
 	rds_connection_string = 'postgres:1@localhost:5432/realestate_db'

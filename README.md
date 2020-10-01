@@ -283,7 +283,7 @@ Expanding to other cities in Canada
 	engine = create_engine(f'postgresql://{rds_connection_string}')
 	coordinatesDF.to_sql(name= 'coordinates_df', con=engine, if_exists = 'replace', index=False)
 
-## Database
+## Postgres Database
 ![Screen Shot 2020 10 01 At 4.58.11 PM](images/Screen%20Shot%202020-10-01%20at%204.58.11%20PM.png)
 
 ![Screen Shot 2020 10 01 At 4.59.54 PM](images/Screen%20Shot%202020-10-01%20at%204.59.54%20PM.png)
@@ -291,25 +291,21 @@ Expanding to other cities in Canada
 ![Screen Shot 2020 10 01 At 4.59.11 PM](images/Screen%20Shot%202020-10-01%20at%204.59.11%20PM.png)
 
 
-## Code
+## Connect to database with Flask
 
 	from flask import Flask, render_template, jsonify
 	from flask_sqlalchemy import SQLAlchemy
 	import psycopg2
 
-
 	app = Flask(__name__)
 	db = SQLAlchemy()
 
-
-# connect to the db
 	con = psycopg2.connect(
             host="localhost",
             database="realestate_db",
             user="postgres",
             password="123"
 			)
-
 
 			def calgary_data_fun():
     		cur = con.cursor()

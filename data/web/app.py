@@ -4,7 +4,6 @@ import psycopg2
 
 
 app = Flask(__name__)
-# mongo = PyMongo(app, uri="mongodb://localhost:27017/realestate_db")
 
 
 db = SQLAlchemy()
@@ -18,6 +17,7 @@ con = psycopg2.connect(
             password="123"
 )
 
+
 def calgary_data_fun():
     cur = con.cursor()
 
@@ -27,13 +27,7 @@ def calgary_data_fun():
     #cur.execute("SELECT cl.price, cl.address, cl.postal_code, cl.bed, cl.full_bath, cl.half_bath, cl.property_area, cl.property_type, s.walk_score, s.bike_score, s.transit_score, coord.lat, coord.long FROM calgary_df AS cl JOIN score_df AS s ON cl.postal_code = s.postal_code JOIN coordinates_df AS coord ON s.postal_code = coord.postal_codes")
 
     calgary_data = cur.fetchall()
-    # print(calgary_data)
 
-    # close cursor
-    #cur.close()
-
-    # close the connection
-    #con.close()
 
     return calgary_data
 

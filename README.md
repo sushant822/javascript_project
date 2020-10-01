@@ -52,7 +52,14 @@ Expanding to other cities in Canada
 
 ## Data Sources
 
-## Extract
+• Remax Canada: https://www.remax.ca/ab/calgary-real-estate
+
+• Walk Score: https://www.walkscore.com/CA-AB/Calgary
+
+
+## Web Scraping
+
+### Extract
 
 ### Scraping Calgary Real Estate Data
 

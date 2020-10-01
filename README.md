@@ -59,10 +59,6 @@ Expanding to other cities in Canada
 
 ## Web Scraping
 
-### Extract
-
-### Scraping Calgary Real Estate Data
-
 	Libraries imported
 
 	import pandas as pd
@@ -76,6 +72,9 @@ Expanding to other cities in Canada
 	warnings.filterwarnings('ignore')
 	print('Libraries imported!')
 	
+
+### Extract
+
 ### Using BeautifulSoup to scrape property details (house address, house details).
 
 	house_address = []

@@ -49,6 +49,15 @@ Screenshots of how a user can select visualisation options: Update with pics aft
 
 Expanding to other cities in Canada
 
+
+## Database
+![Screen Shot 2020 10 01 At 4.58.11 PM](images/Screen%20Shot%202020-10-01%20at%204.58.11%20PM.png)
+
+![Screen Shot 2020 10 01 At 4.59.54 PM](images/Screen%20Shot%202020-10-01%20at%204.59.54%20PM.png)
+
+![Screen Shot 2020 10 01 At 4.59.11 PM](images/Screen%20Shot%202020-10-01%20at%204.59.11%20PM.png)
+
+
 ## Code
 
 	from flask import Flask, render_template, jsonify
@@ -150,7 +159,7 @@ Expanding to other cities in Canada
 ![Screen Shot 2020 10 01 At 4.47.31 PM](images/Screen%20Shot%202020-10-01%20at%204.47.31%20PM.png)
 
 
-## Cluster map
+## Cluster Maps
 ![Screen Shot 2020 10 01 At 3.58.05 PM](images/Screen%20Shot%202020-10-01%20at%203.58.05%20PM.png)
 
 ![Screen Shot 2020 10 01 At 3.58.29 PM](images/Screen%20Shot%202020-10-01%20at%203.58.29%20PM.png)
@@ -195,6 +204,10 @@ Expanding to other cities in Canada
 ![Screen Shot 2020 10 01 At 4.04.34 PM](images/Screen%20Shot%202020-10-01%20at%204.04.34%20PM.png)
 
 ![Screen Shot 2020 10 01 At 4.04.49 PM](images/Screen%20Shot%202020-10-01%20at%204.04.49%20PM.png)
+
+
+## Data
+![Screen Shot 2020 10 01 At 4.55.32 PM](images/Screen%20Shot%202020-10-01%20at%204.55.32%20PM.png)
 
 
 ## Authors and Acknowledgements

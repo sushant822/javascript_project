@@ -77,8 +77,8 @@ L.control.layers(baseMaps, overlayMaps, {
 
 
 
-  /*
-  var myMap = L.map("mapid", {
+  
+  var myMapHeat = L.map("map", {
     center: [51.025036,-114.0411447],
     zoom: 10.5
   });
@@ -90,7 +90,7 @@ L.control.layers(baseMaps, overlayMaps, {
     zoomOffset: -1,
     id: "mapbox/streets-v11",
     accessToken: API_KEY
-  }).addTo(myMap);
+  }).addTo(myMapHeat);
   
   var url = "http://127.0.0.1:5000//jsonified";
   //var url = "https://data.sfgov.org/resource/cuks-n6tp.json?$limit=10000";
@@ -122,10 +122,10 @@ L.control.layers(baseMaps, overlayMaps, {
     var heat = L.heatLayer(heatArray, {
       radius: 50,
       blur: 35
-    }).addTo(myMap);
+    }).addTo(myMapHeat);
   
   });
-  */
+  
 
 
 
@@ -288,7 +288,8 @@ var baseMaps = {
 var overlayMaps = {
   "Properties": circleMarkers
   };
-*/
+  */
+
 // Define a map object
 var myMap = L.map("mapid", {
   center: [51.025036,-114.0411447],

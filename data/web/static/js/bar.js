@@ -125,7 +125,7 @@ d3.json(url, function(response) {
 
   // add the x Axis
   var x = d3.scaleLinear()
-    .domain([0, 8])
+    .domain([0, 7])
     .range([0, width]);
   svg.append("g")
       .attr("transform", "translate(0," + height + ")")

@@ -12,7 +12,12 @@ html {
 
 
 #mapid{
-  height: 600px;
+  height: 700px;
+  width: 900px;
+}
+
+#map{
+  height: 700px;
   width: 900px;
 }
 

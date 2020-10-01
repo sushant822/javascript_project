@@ -147,7 +147,6 @@ Expanding to other cities in Canada
 ## Homepage
 
 ![Screen Shot 2020 10 01 At 4.46.56 PM](images/Screen%20Shot%202020-10-01%20at%204.46.56%20PM.png)
-
 ![Screen Shot 2020 10 01 At 4.47.31 PM](images/Screen%20Shot%202020-10-01%20at%204.47.31%20PM.png)
 
 

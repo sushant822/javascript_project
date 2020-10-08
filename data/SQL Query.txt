@@ -1,4 +1,4 @@
---create tables for raw data to be loaded into
+--create tables for raw data to be loaded
 CREATE TABLE calgary_df (
 	id SERIAL PRIMARY KEY,
 	price INT,
